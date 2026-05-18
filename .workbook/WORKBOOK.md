@@ -18,6 +18,7 @@
 - E2E Playwright tests (redo with test user bypass)
 
 ## Recently Completed
+- [2026-05-17] Havana-77364 - README setup guide, env.example cleanup, quick setup script, dev env loading
 - [2026-03-31] feat/trade-history-admin-void — Full trade log (paginated), admin time-based voiding, custom resolution timestamp
 - [2026-03-30] Portal modals to document.body — fixes stacking context bug on deposit/suggest modals
 - [2026-03-30] Deposit modal redesign — centered overlay, opaque white bg, gold theme, scrollable
@@ -52,4 +53,4 @@
 - #67 — Fix share pricing, raise maxShares, inline deposit (REVIEWING)
 
 ---
-*Last updated: 2026-03-30T06:45:00Z*
+*Last updated: 2026-05-17T00:00:00Z*
