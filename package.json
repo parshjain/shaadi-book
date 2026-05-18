@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "setup": "bash scripts/setup.sh",
+    "setup:check": "bash scripts/setup.sh --check",
+    "dev:local": "bash scripts/dev.sh",
     "dev:backend": "npm run dev --workspace=backend",
     "dev:frontend": "npm run dev --workspace=frontend",
     "build:backend": "npm run build --workspace=backend",

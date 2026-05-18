@@ -1,28 +1,31 @@
 # Shaadi Book
 
-Live prediction markets for Parsh and Spoorthi's wedding. Guests deposit USD, buy or sell LMSR-priced outcome shares, and resolve winnings after the event. Charity collection is handled outside the app.
+A live prediction-market app for wedding guests. People join with a phone number, deposit USD, buy or sell outcome shares, and settle winnings after the event. The app handles the market, wallet, ledger, admin flow, and realtime experience; charity collection happens outside the app.
 
-## Quick Start
+## Pick Your Path
 
-Prerequisites:
+### I just want to run it
 
-- Node.js 20 or newer
-- npm 10 or newer
-- Docker Desktop, or Docker Engine with Compose v2
-- Optional for real auth/payments: Twilio Verify and Stripe test credentials
-
-Fastest local setup:
+Use this if you are non-technical or you want the fastest local demo.
 
 ```bash
 npm run setup
+npm run dev:local
 ```
 
-The setup script prompts for your local admin phone number, house account details, Stripe/Twilio placeholders, and whether to install packages, start Docker services, and run Prisma migrations. It writes a local `.env` file and never commits secrets.
+Then open http://localhost:3000.
 
-Manual setup:
+What happens:
+
+- `npm run setup` asks a few plain-English questions and creates `.env` for you.
+- `npm run dev:local` starts Postgres, Redis, the backend, and the frontend.
+- The first admin is the phone number you enter during setup.
+
+### I am a developer
+
+Use this if you want separate terminals and direct control.
 
 ```bash
-cp env.example .env
 npm install
 docker compose up -d db redis
 cd backend && npx prisma migrate deploy && cd ..
@@ -30,13 +33,42 @@ npm run dev:backend
 npm run dev:frontend
 ```
 
-Open:
+Useful developer commands:
 
-- Frontend: http://localhost:3000
-- Backend health: http://localhost:3001/health
-- tRPC endpoint: http://localhost:3001/trpc
+```bash
+npm run setup:check
+npm run test:backend
+npm run test:frontend
+npm run typecheck
+```
 
-## What The Setup Script Does
+### I am deploying it
+
+Production runs with Docker Compose behind Caddy:
+
+```bash
+docker compose -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.prod.yml exec -T api npx prisma migrate deploy
+```
+
+Pushes to `main` trigger the GitHub Actions deploy workflow for the DigitalOcean droplet.
+
+## Requirements
+
+For local use:
+
+- Docker Desktop running
+- Node.js 20 or newer
+- npm 10 or newer
+
+For real OTP and payments:
+
+- Twilio Verify credentials
+- Stripe test or live credentials
+
+You can run the app without real Twilio and Stripe credentials for basic development, but real phone login and deposits need provider keys.
+
+## Setup Wizard
 
 Run:
 
@@ -44,47 +76,77 @@ Run:
 npm run setup
 ```
 
-Useful flags:
+The wizard asks for:
+
+- Your admin phone number
+- The House account name and phone number
+- Local app URLs
+- Stripe keys, or placeholders for local-only work
+- Twilio keys, or placeholders for local-only work
+- Whether to install dependencies, start services, and run migrations
+
+The script writes `.env` and backs up an existing `.env` before replacing it.
+
+Useful options:
 
 ```bash
-npm run setup -- --yes
-npm run setup -- --no-install
-npm run setup -- --no-docker
-npm run setup -- --no-migrate
-npm run setup -- --force
+npm run setup -- --yes          # Accept safe defaults
+npm run setup -- --check        # Check whether your machine is ready
+npm run setup -- --no-install   # Do not run npm install
+npm run setup -- --no-docker    # Do not start Docker services
+npm run setup -- --no-migrate   # Do not run Prisma migrations
+npm run setup -- --force        # Replace .env without creating a backup
 ```
 
-`--yes` accepts defaults for prompts that can safely default. `--force` allows overwriting an existing `.env`; otherwise the script creates a timestamped backup first.
+## One-Command Local Run
 
-The script configures:
-
-- `JWT_SECRET` and `DB_PASSWORD` with generated secure values
-- local Postgres and Redis URLs
-- admin phone numbers for admin access
-- house account phone and display name
-- app URLs, CORS origin, and WebSocket URL
-- Stripe, Twilio, SMS, and push-notification placeholders
-- default market liquidity parameter
-
-After setup, run the app in three terminals:
+After setup:
 
 ```bash
-docker compose up -d db redis
-npm run dev:backend
-npm run dev:frontend
+npm run dev:local
 ```
 
-The backend and frontend dev scripts source the root `.env` before starting.
+This starts:
 
-To run the backend in Docker instead of `npm run dev:backend`:
+- Postgres on `localhost:5432`
+- Redis on `localhost:6379`
+- API, tRPC, and Socket.io on `localhost:3001`
+- Next.js frontend on `localhost:3000`
+
+Press `Ctrl+C` to stop the backend and frontend. Postgres and Redis stay running in Docker so your data remains available.
+
+To stop the database and Redis:
 
 ```bash
-docker compose up -d --build api
+docker compose down
 ```
 
-## Environment
+To delete all local data and start fresh:
 
-Copy `env.example` to `.env` or let `npm run setup` create it.
+```bash
+docker compose down -v
+npm run dev:local
+```
+
+## Customization Checklist
+
+Edit `.env` when you want to customize the app.
+
+| Setting | What it controls |
+| --- | --- |
+| `ADMIN_PHONE_NUMBERS` | Comma-separated admin phones, like `+15551234567,+919876543210` |
+| `HOUSE_NAME` | Display name for the internal market-maker account |
+| `HOUSE_PHONE` | Phone number used for the House account |
+| `FRONTEND_URL` | Browser URL for the app |
+| `CORS_ORIGIN` | Origin the backend accepts browser requests from |
+| `NEXT_PUBLIC_API_URL` | Public backend URL used by the frontend |
+| `NEXT_PUBLIC_WS_URL` | Public WebSocket URL used by the frontend |
+| `B_FLOOR_DEFAULT` | Default liquidity floor for new markets |
+| `ENABLE_SMS_NOTIFICATIONS` | Turns periodic SMS notifications on or off |
+
+Phone numbers must use E.164 format, such as `+15551234567` or `+919876543210`.
+
+## Environment Variables
 
 Required for local infrastructure:
 
@@ -121,48 +183,79 @@ Optional:
 - `NEXT_PUBLIC_API_URL`
 - `NEXT_PUBLIC_WS_URL`
 
-Phone numbers must be E.164 formatted, for example `+15551234567` or `+919876543210`.
+## Common Tasks
 
-## Development Commands
+### Open the app
 
 ```bash
-npm run dev:backend      # Express, tRPC, Socket.io on :3001
-npm run dev:frontend     # Next.js on :3000
-npm run build:backend
-npm run build:frontend
-npm run test:backend
-npm run test:frontend
-npm run typecheck
+npm run dev:local
 ```
 
-Database commands:
+Then open http://localhost:3000.
+
+### Check whether the backend is alive
 
 ```bash
-docker compose up -d db redis
-cd backend && npx prisma migrate dev
-cd backend && npx prisma migrate deploy
+curl http://localhost:3001/health
+```
+
+### Open the database browser
+
+```bash
 cd backend && npx prisma studio
 ```
 
-Reset local data:
+### Run migrations
 
 ```bash
-docker compose down -v
-docker compose up -d db redis
 cd backend && npx prisma migrate deploy
 ```
 
-## Architecture Notes
+### Test Stripe webhooks locally
 
-- Frontend: Next.js 14 App Router, Tailwind CSS, shadcn-style components
+```bash
+stripe listen --forward-to localhost:3001/api/webhooks/stripe
+```
+
+Put the printed webhook signing secret in `STRIPE_WEBHOOK_SECRET`.
+
+### Run only infrastructure
+
+```bash
+docker compose up -d db redis
+```
+
+### Run the API in Docker
+
+```bash
+docker compose up -d --build api
+```
+
+## Project Structure
+
+```text
+shaadi-book/
+|-- frontend/          # Next.js app
+|-- backend/           # Express, tRPC, Socket.io, Prisma
+|-- shared/            # Shared package workspace
+|-- scripts/           # Setup and local development helpers
+|-- docker-compose.yml
+|-- docker-compose.prod.yml
+|-- env.example
+`-- PRD.md
+```
+
+## Architecture
+
+- Frontend: Next.js 14 App Router and Tailwind CSS
 - Backend: Node.js, Express, tRPC, Socket.io
 - Database: PostgreSQL 16 with Prisma ORM
-- Cache and realtime fanout: Redis
-- Auth: phone OTP through Twilio Verify
-- Payments: Stripe, USD
-- Deployment: Docker Compose on DigitalOcean behind Caddy
+- Realtime: Redis-backed Socket.io
+- Auth: Twilio Verify phone OTP
+- Payments: Stripe in USD
+- Hosting: DigitalOcean droplet with Docker Compose and Caddy
 
-Financial rules:
+Financial guarantees:
 
 - User balances are derived from the append-only `transactions` ledger.
 - No independent mutable user-balance column should be trusted.
@@ -173,73 +266,70 @@ Financial rules:
 - Markets require at least 5 unique bettors before resolution.
 - House seeding creates internal market-maker liquidity without Stripe.
 
-## Production Deployment
+## Production Notes
 
-Production runs on a DigitalOcean droplet with:
+The production droplet keeps its own `.env`; never commit production secrets.
+
+Deployment flow:
 
 ```bash
-docker compose -f docker-compose.prod.yml up -d --build
+git push origin main
+```
+
+The deploy workflow runs:
+
+```bash
+cd /opt/shaadi-book
+git pull origin main
+docker compose -f docker-compose.prod.yml build
+docker compose -f docker-compose.prod.yml up -d
 docker compose -f docker-compose.prod.yml exec -T api npx prisma migrate deploy
 ```
 
-The GitHub Action in `.github/workflows/deploy.yml` deploys automatically on push to `main`. The droplet keeps its own `.env`; do not commit production secrets.
+Production endpoints:
 
-Production URLs and services:
-
-- Domain: https://markets.parshandspoorthi.com
-- Caddy terminates TLS and proxies frontend, API, tRPC, health, and Socket.io.
-- Postgres and Redis are internal Compose services.
+- App: https://markets.parshandspoorthi.com
+- Health: https://markets.parshandspoorthi.com/health
 
 ## FAQs
 
-### Do I need Stripe and Twilio to run locally?
+### I am not technical. What do I type?
 
-No for basic development. You can start the app with placeholder Stripe and Twilio values, but real OTP login and real deposits require valid provider credentials.
+Type these two commands from the project folder:
 
-### Why does the frontend run separately from Docker locally?
+```bash
+npm run setup
+npm run dev:local
+```
 
-Local Compose starts Postgres, Redis, and optionally the API. Running Next.js with `npm run dev:frontend` keeps hot reload fast and avoids rebuilding the web image for every UI change.
+When the app says it is starting, open http://localhost:3000.
 
-### What phone number becomes an admin?
+### What should I enter for the admin phone?
 
-Any E.164 number in `ADMIN_PHONE_NUMBERS` becomes an admin after login, for example `+15551234567,+919876543210`.
+Enter the phone number you want to use for admin access, including country code. Examples: `+15551234567` for the US or `+919876543210` for India.
 
-### What is the House account?
+### Can I leave Stripe and Twilio as placeholders?
 
-The House account is the internal market-maker account used for seeding and AMM flows. Configure it with `HOUSE_PHONE` and `HOUSE_NAME`; it is not a Stripe customer.
+Yes for basic local development. You need real keys only for real OTP login, SMS, Stripe checkout, and webhook testing.
+
+### Why does Docker need to be running?
+
+Docker runs the local Postgres database and Redis service. The app needs both.
+
+### How do I know my setup is ready?
+
+```bash
+npm run setup:check
+```
+
+### Where is my local configuration?
+
+In `.env`. This file is intentionally ignored by Git.
 
 ### Where are balances stored?
 
-Balances are not stored directly. They are derived from ledger rows in `transactions`.
+Balances are derived from ledger rows in `transactions`. Do not add or trust a separate mutable balance field.
 
-### How do I inspect the database?
-
-```bash
-cd backend && npx prisma studio
-```
-
-### How do I clear bad local data?
-
-```bash
-docker compose down -v
-docker compose up -d db redis
-cd backend && npx prisma migrate deploy
-```
-
-### How do I test Stripe webhooks locally?
-
-Use the Stripe CLI to forward webhooks to the backend:
-
-```bash
-stripe listen --forward-to localhost:3001/api/webhooks/stripe
-```
-
-Put the printed webhook signing secret in `STRIPE_WEBHOOK_SECRET`.
-
-### Why is migration SQL ignored?
-
-This repo's `.gitignore` currently ignores `backend/prisma/migrations/*.sql`. Coordinate before changing migration tracking behavior.
-
-### What should I read before changing financial logic?
+### What should I read before changing money movement?
 
 Read `PRD.md`, `AGENTS.md`, `backend/src/services/ledger.ts`, `backend/src/services/purchaseEngine.ts`, `backend/src/services/lmsr.ts`, and `backend/prisma/schema.prisma`.

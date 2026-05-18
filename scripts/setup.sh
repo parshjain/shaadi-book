@@ -9,6 +9,7 @@ DO_INSTALL=true
 DO_DOCKER=true
 DO_MIGRATE=true
 FORCE=false
+CHECK_ONLY=false
 
 for arg in "$@"; do
   case "$arg" in
@@ -17,12 +18,14 @@ for arg in "$@"; do
     --no-docker) DO_DOCKER=false ;;
     --no-migrate) DO_MIGRATE=false ;;
     --force) FORCE=true ;;
+    --check) CHECK_ONLY=true ;;
     --help|-h)
       cat <<'HELP'
 Usage: npm run setup -- [options]
 
 Options:
   --yes, -y       Accept safe defaults where possible.
+  --check         Check local prerequisites and current .env.
   --no-install   Skip npm install.
   --no-docker    Skip docker compose startup.
   --no-migrate   Skip Prisma migrations.
@@ -128,8 +131,56 @@ validate_phone() {
   [[ "$phone" =~ ^\+[0-9]{8,15}$ ]]
 }
 
+check_setup() {
+  local ok=true
+
+  echo "Shaadi Book setup check"
+  echo
+
+  if command_exists node; then
+    echo "Node: $(node --version)"
+  else
+    echo "Node: missing"
+    ok=false
+  fi
+
+  if command_exists npm; then
+    echo "npm:  $(npm --version)"
+  else
+    echo "npm:  missing"
+    ok=false
+  fi
+
+  if command_exists docker; then
+    echo "Docker: installed"
+  else
+    echo "Docker: missing"
+    ok=false
+  fi
+
+  if [[ -f "$ENV_FILE" ]]; then
+    echo ".env: present"
+  else
+    echo ".env: missing. Run npm run setup"
+    ok=false
+  fi
+
+  echo
+  if [[ "$ok" == true ]]; then
+    echo "Ready. Run npm run dev:local"
+  else
+    echo "Not ready yet. Install the missing tools or run npm run setup."
+    return 1
+  fi
+}
+
 main() {
   cd "$ROOT_DIR"
+
+  if [[ "$CHECK_ONLY" == true ]]; then
+    check_setup
+    return
+  fi
 
   if ! command_exists node; then
     echo "Node.js 20+ is required. Install Node, then rerun this script." >&2
