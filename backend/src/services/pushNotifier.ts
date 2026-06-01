@@ -220,7 +220,7 @@ export async function sendPeriodicPushUpdate(): Promise<void> {
   const extra = markets.length > 5 ? `\n...and ${markets.length - 5} more` : "";
 
   await sendPushToAll({
-    title: "Shaadi Book Market Update",
+    title: "Baby Hasan Bets Market Update",
     body: lines.join("\n") + extra,
     url: "/",
     tag: "market-update",

@@ -36,12 +36,12 @@ export function MarketTags({ market, className = "" }: MarketTagsProps) {
   if (!hasAny) return null;
 
   const familyLabel =
-    familySide === "Spoorthi"
-      ? "Spoorthi's side"
-      : familySide === "Parsh"
-      ? "Parsh's side"
-      : familySide === "Both"
-      ? "Both sides"
+    familySide === "Both"
+      ? "Both parents"
+      : familySide === "Baby Hasan"
+      ? "Baby Hasan"
+      : familySide === "Anusha" || familySide === "Alif"
+      ? familySide
       : null;
 
   return (

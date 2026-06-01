@@ -215,7 +215,7 @@ export default function NotificationsPage() {
             <p className="font-medium">Add to Home Screen to enable push</p>
             <p className="mt-1 text-amber-600">
               Tap the <strong>Share</strong> button (box with arrow at the bottom),
-              then <strong>Add to Home Screen</strong>. Open Shaadi Book from your
+              then <strong>Add to Home Screen</strong>. Open Baby Hasan Bets from your
               home screen to enable push notifications.
             </p>
           </div>
@@ -286,7 +286,7 @@ export default function NotificationsPage() {
           <>
             <p className="text-xs text-charcoal/50 mb-3">
               By opting in you consent to receive automated text messages from
-              Shaadi Book (Elysium Services LLC) at your registered number.
+              Baby Hasan Bets (Elysium Services LLC) at your registered number.
               Message frequency varies. Msg & data rates may apply. Reply STOP
               to unsubscribe.
             </p>
@@ -302,7 +302,7 @@ export default function NotificationsPage() {
       </section>
 
       <p className="text-xs text-charcoal/40 text-center mt-6">
-        Shaadi Book by Elysium Services LLC
+        Baby Hasan Bets by Elysium Services LLC
         <br />
         14 Barbieri Court, Princeton NJ 08540
       </p>

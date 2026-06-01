@@ -116,9 +116,9 @@ model Market {
   createdAt        DateTime     @default(now()) @map("created_at")
   resolvedAt       DateTime?    @map("resolved_at")
   winningOutcomeId String?      @map("winning_outcome_id")
-  /// Wedding event this market belongs to (e.g. 'Sangeet', 'Haldi', 'Baraat', 'Wedding Ceremony', 'Reception', 'After Party', 'General')
+  /// Gender reveal category this market belongs to (e.g. 'Reveal', 'Outfits', 'Food', 'Guests', 'General')
   eventTag         String?      @map("event_tag")
-  /// Which family side this market is relevant to ('Spoorthi', 'Parsh', 'Both')
+  /// Which person or family side this market is relevant to ('Anusha', 'Alif', 'Baby Hasan', 'Both')
   familySide       String?      @map("family_side")
   /// Freeform tags like 'dance', 'food', 'emotional'
   customTags       String[]     @default([]) @map("custom_tags")

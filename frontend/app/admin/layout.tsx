@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         {/* Brand */}
         <div className="px-5 py-4 border-b border-[#f0ece7]">
           <p className="text-xs font-semibold uppercase tracking-widest text-warmGray">
-            Shaadi Book
+            Baby Hasan Bets
           </p>
           <p className="text-base font-bold text-[#1e3a5f] mt-0.5">Admin</p>
         </div>

@@ -168,8 +168,9 @@ export async function sendSmsToAll(message: string): Promise<void> {
 export function notifyNewMarket(question: string): void {
   if (!isSmsEnabled()) return;
 
+  const appUrl = process.env["FRONTEND_URL"] ?? "https://babyhasanbets.com";
   const message =
-    `Shaadi Book | New market: "${question}" — Place your bet at markets.parshandspoorthi.com`;
+    `Baby Hasan Bets | New market: "${question}" - Place your bet at ${appUrl}`;
   console.log(`[smsNotifier] New market notification queued: "${question}"`);
 
   void sendSmsToAll(message).catch((err) => {
@@ -186,13 +187,13 @@ export function notifyNewMarket(question: string): void {
  * send to all registered users.
  *
  * Message format:
- *   Shaadi Book | Market Update
+ *   Baby Hasan Bets | Market Update
  *
  *   • {question}: {outcome1} {price1}¢ | {outcome2} {price2}¢
  *   ...
  *   ...and X more   ← only when truncated to stay under 1 600 chars
  *
- *   Bet now: markets.parshandspoorthi.com
+ *   Bet now: https://babyhasanbets.com
  */
 export async function sendPeriodicUpdate(): Promise<void> {
   console.log("[smsNotifier] Periodic update cycle starting");
@@ -210,8 +211,9 @@ export async function sendPeriodicUpdate(): Promise<void> {
     return;
   }
 
-  const header = "Shaadi Book | Market Update\n\n";
-  const footer = "\nBet now: markets.parshandspoorthi.com";
+  const appUrl = process.env["FRONTEND_URL"] ?? "https://babyhasanbets.com";
+  const header = "Baby Hasan Bets | Market Update\n\n";
+  const footer = `\nBet now: ${appUrl}`;
   const MAX_SMS_LENGTH = 1600;
 
   let body = "";
@@ -344,9 +346,10 @@ export function notifyMarketActivity(
     const amountStr = dollarAmount % 1 === 0
       ? `$${dollarAmount.toFixed(0)}`
       : `$${dollarAmount.toFixed(2)}`;
+    const appUrl = process.env["FRONTEND_URL"] ?? "https://babyhasanbets.com";
     const message =
-      `Shaadi Book | ${actorName} just bet ${amountStr} on "${outcomeLabel}" in ` +
-      `"${marketQuestion}". Check it out: markets.parshandspoorthi.com/markets/${marketId}`;
+      `Baby Hasan Bets | ${actorName} just bet ${amountStr} on "${outcomeLabel}" in ` +
+      `"${marketQuestion}". Check it out: ${appUrl}/markets/${marketId}`;
 
     console.log(
       `[smsNotifier] notifyMarketActivity: sending to ${recipients.length} recipients for market ${marketId}`

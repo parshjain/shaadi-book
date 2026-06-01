@@ -10,12 +10,12 @@ import { test, expect } from "@playwright/test";
 // ---------------------------------------------------------------------------
 
 test.describe("Page render smoke tests (unauthenticated)", () => {
-  test("1. /login renders Shaadi Book text with no JS errors", async ({ page }) => {
+  test("1. /login renders Baby Hasan Bets text with no JS errors", async ({ page }) => {
     const jsErrors: string[] = [];
     page.on("pageerror", (err) => jsErrors.push(err.message));
 
     await page.goto("/login");
-    await expect(page.locator("body")).toContainText("Shaadi Book");
+    await expect(page.locator("body")).toContainText("Baby Hasan Bets");
     expect(jsErrors).toEqual([]);
   });
 

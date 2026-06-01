@@ -1,4 +1,8 @@
-markets.parshandspoorthi.com {
+www.babyhasanbets.com {
+	redir https://babyhasanbets.com{uri} permanent
+}
+
+babyhasanbets.com {
 	# Rewrite /api/trpc/* to /trpc/* for the backend
 	handle /api/trpc/* {
 		uri strip_prefix /api

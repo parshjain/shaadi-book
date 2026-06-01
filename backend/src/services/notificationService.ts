@@ -52,7 +52,7 @@ export async function notifyNewMarket(
 
     broadcastMarketNotification(io, {
       marketId: market.id,
-      message: `New bet just dropped on Shaadi Book: "${market.question}"`,
+      message: `New bet just dropped on Baby Hasan Bets: "${market.question}"`,
     });
   }
 

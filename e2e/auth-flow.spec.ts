@@ -9,7 +9,7 @@ test.describe("Auth Flow", () => {
     page.on("pageerror", (err) => errors.push(err.message));
 
     await page.goto("/login");
-    await expect(page.locator("h1")).toContainText("Shaadi Book");
+    await expect(page.locator("h1")).toContainText("Baby Hasan Bets");
 
     // No unhandled JS errors
     expect(errors).toHaveLength(0);

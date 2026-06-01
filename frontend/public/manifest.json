@@ -1,7 +1,7 @@
 {
-  "name": "Shaadi Book",
-  "short_name": "PS Markets",
-  "description": "Wedding prediction markets for Parsh & Spoorthi",
+  "name": "Baby Hasan Bets",
+  "short_name": "Hasan Bets",
+  "description": "Gender reveal prediction markets for Baby Hasan",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF7F2",

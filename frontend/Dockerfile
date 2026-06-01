@@ -20,7 +20,7 @@ COPY shared/ ./shared/
 WORKDIR /app/frontend
 
 # Build-time env vars baked into client JS bundles
-ARG NEXT_PUBLIC_WS_URL=https://markets.parshandspoorthi.com
+ARG NEXT_PUBLIC_WS_URL=https://babyhasanbets.com
 ENV NEXT_PUBLIC_WS_URL=$NEXT_PUBLIC_WS_URL
 
 RUN npm run build

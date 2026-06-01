@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // ---------------------------------------------------------------------------
-// /rules — How to Play · Shaadi Book
+// /rules — How to Play · Baby Hasan Bets
 // ---------------------------------------------------------------------------
 
 export default function RulesPage() {
@@ -20,10 +20,10 @@ export default function RulesPage() {
           {/* Gold accent underline */}
           <div className="mt-2.5 h-px w-14 mx-auto bg-[#c8a45c]" />
           <p className="mt-3 text-sm text-warmGray font-medium">
-            A quick rundown in wedding prediction markets
+            A quick rundown in gender reveal prediction markets
           </p>
           <p className="mt-1.5 text-xs text-warmGray">
-            A background in degeneracy required 
+            A background in degeneracy required
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export default function RulesPage() {
         >
           <ul className="flex flex-col gap-3 mt-1">
             <RuleItem
-              text="Bet on real outcomes from the wedding — Will the baraat be late? How many outfit changes? Who (if anyone) cries first?"
+              text="Bet on real outcomes from the gender reveal — Gender? Will Alif cry? What color will Anusha wear?"
             />
             <RuleItem
               text={
@@ -88,7 +88,7 @@ export default function RulesPage() {
                 Logarithmic Market Scoring Rule (LMSR)
               </span>{" "}
               — inspired by previous attempts to build prediction markets
-              optimized for low volume and small numbers of traders. Shrey
+              optimized for low volume and small numbers of traders. The host
               is the bookie, but{" "}
               <span className="font-semibold text-charcoal">
                 not the house or market maker
@@ -151,7 +151,7 @@ export default function RulesPage() {
                 Example
               </p>
               <p className="text-sm text-charcoal">
-                &quot;Will Parsh cry during the pheras?&quot; opens at{" "}
+                &quot;Will Alif cry at the gender reveal?&quot; opens at{" "}
                 <Highlight>50¢ / 50¢</Highlight>. Guest A slams $20 on
                 Yes → price jumps to <Highlight>88¢</Highlight>. Guest B
                 bets $10 on No → settles back to{" "}
@@ -243,7 +243,7 @@ export default function RulesPage() {
                   <>
                     <Highlight>10% of your profit</Highlight> goes to
                     charity — collected externally via Venmo after the
-                    wedding, not deducted in-app. The couple hasn&apos;t
+                    reveal, not deducted in-app. The hosts haven&apos;t
                     chosen the cause yet. You&apos;re basically a
                     quantitative philanthropist.
                   </>
@@ -276,7 +276,7 @@ export default function RulesPage() {
             </div>
 
             <RuleItem
-              text="Payouts sent via Venmo or Zelle after the wedding. Shrey is the bookie. He&apos;s good for it."
+              text="Payouts sent via Venmo or Zelle after the reveal. The host is the bookie."
             />
           </div>
         </SectionCard>
@@ -292,7 +292,7 @@ export default function RulesPage() {
             <RuleItem
               text={
                 <>
-                  Shrey is the bookie — but he&apos;s not the house.{" "}
+                  The host is the bookie — but not the house.{" "}
                   <span className="text-warmGray">
                     You&apos;re betting against each other in a parimutuel
                     pool.
@@ -337,7 +337,7 @@ export default function RulesPage() {
               }
             />
             <RuleItem
-              text="Have fun. Feel free to game the system to win back your Air India flight ticket. This is a wedding, not a hedge fund."
+              text="Have fun. Feel free to game the system. This is a gender reveal, not a hedge fund."
             />
             <RuleItem
               text="This is for charity and entertainment. Winning feels like a music video. Losing still helped a good cause."
@@ -348,8 +348,8 @@ export default function RulesPage() {
         {/* ── Disclaimer ───────────────────────────────────────────── */}
         <div className="px-2 pb-2">
           <p className="text-[10px] text-warmGray text-center leading-relaxed">
-            This is a private entertainment experience for the wedding of
-            Parsh &amp; Spoorthi. Partial proceeds benefit charity (we're slightly selfish). Play
+            This is a private entertainment experience for Baby Hasan&apos;s
+            gender reveal. Partial proceeds benefit charity. Play
             responsibly.
           </p>
         </div>

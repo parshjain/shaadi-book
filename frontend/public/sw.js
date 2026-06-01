@@ -1,5 +1,5 @@
 /**
- * Service Worker — Shaadi Book Push Notifications
+ * Service Worker — Baby Hasan Bets Push Notifications
  *
  * Handles incoming push events and notification clicks.
  * Registered from the NotificationProvider component.
@@ -14,7 +14,7 @@ self.addEventListener("push", (event) => {
   try {
     payload = event.data.json();
   } catch {
-    payload = { title: "Shaadi Book", body: event.data.text() };
+    payload = { title: "Baby Hasan Bets", body: event.data.text() };
   }
 
   const { title, body, url, tag } = payload;
@@ -23,13 +23,13 @@ self.addEventListener("push", (event) => {
     body: body || "",
     icon: "/favicon.svg",
     badge: "/favicon.svg",
-    tag: tag || "shaadi-book",
+    tag: tag || "baby-hasan-bets",
     data: { url: url || "/" },
     vibrate: [100, 50, 100],
     renotify: true,
   };
 
-  event.waitUntil(self.registration.showNotification(title || "Shaadi Book", options));
+  event.waitUntil(self.registration.showNotification(title || "Baby Hasan Bets", options));
 });
 
 self.addEventListener("notificationclick", (event) => {
@@ -43,7 +43,7 @@ self.addEventListener("notificationclick", (event) => {
       .matchAll({ type: "window", includeUncontrolled: true })
       .then((clientList) => {
         for (const client of clientList) {
-          if (client.url.includes("parshandspoorthi.com") && "focus" in client) {
+          if (client.url.includes("babyhasanbets.com") && "focus" in client) {
             client.navigate(url);
             return client.focus();
           }
