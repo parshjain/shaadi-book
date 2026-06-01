@@ -160,7 +160,7 @@ export function SuggestMarketModal({ isOpen, onClose }: Props) {
                 Suggest a Market
               </h2>
               <p className="text-xs text-warmGray mt-0.5">
-                Propose a prediction market for Parsh &amp; Spoorthi's wedding
+                Propose a prediction market for the gender reveal
               </p>
             </div>
             <button
@@ -228,7 +228,7 @@ export function SuggestMarketModal({ isOpen, onClose }: Props) {
                     maxLength={500}
                     value={questionText}
                     onChange={(e) => setQuestionText(e.target.value)}
-                    placeholder="Will the baraat arrive on time?"
+                    placeholder="Will the reveal happen before 3pm?"
                     className="w-full rounded-xl border border-[rgba(184,134,11,0.12)] bg-[#faf9f7] px-4 py-3 text-sm text-charcoal placeholder:text-[#c0bbb5] focus:outline-none focus:ring-2 focus:ring-[#c8a45c]/40 focus:border-[#c8a45c] transition-colors"
                   />
                   <p className="mt-1 text-xs text-warmGray">

@@ -26,6 +26,7 @@ import { startPeriodicPushUpdates } from "./services/pushNotifier.js";
 import { startPriceSnapshotJob } from "./services/priceSnapshot.js";
 import { reschedulePendingMarkets } from "./services/notificationService.js";
 import { openMarket } from "./services/marketService.js";
+import { seedInitialBabyHasanMarkets } from "./services/initialMarkets.js";
 import { prisma } from "./db.js";
 
 // ---------------------------------------------------------------------------
@@ -149,6 +150,14 @@ createWebSocketServer(httpServer)
     // Start periodic push notification updates (every 5 hours, same cadence as SMS).
     // Always enabled when VAPID keys are set — no separate env flag needed.
     startPeriodicPushUpdates(5 * 60 * 60 * 1000);
+
+    // Seed Baby Hasan markets once on configured deployments. The seeder is
+    // idempotent by question text and skips markets that already have trades.
+    if (process.env["SEED_BABY_HASAN_MARKETS"] === "true") {
+      seedInitialBabyHasanMarkets().catch((err: unknown) => {
+        console.error("[server] Failed to seed Baby Hasan markets:", err);
+      });
+    }
 
     // Reschedule pending markets that have a scheduledOpenAt (survives restarts).
     reschedulePendingMarkets(prisma, openMarket, io).catch((err: unknown) => {

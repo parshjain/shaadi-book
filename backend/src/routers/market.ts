@@ -80,16 +80,15 @@ const MarketStatusSchema = z.enum([
 ]);
 
 const EventTagSchema = z.enum([
-  "Sangeet",
-  "Haldi",
-  "Baraat",
-  "Wedding Ceremony",
-  "Reception",
-  "After Party",
+  "Reveal",
+  "Family",
+  "Outfits",
+  "Food",
+  "Guests",
   "General",
 ]);
 
-const FamilySideSchema = z.enum(["Spoorthi", "Parsh", "Both"]);
+const FamilySideSchema = z.enum(["Anusha", "Alif", "Baby Hasan", "Both"]);
 
 // ---------------------------------------------------------------------------
 // Router

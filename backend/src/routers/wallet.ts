@@ -139,7 +139,7 @@ export const walletRouter = router({
               currency: "usd",
               unit_amount: input.amountCents,
               product_data: {
-                name: "Shaadi Book Credits",
+                name: "Baby Hasan Bets Credits",
                 description: `$${(input.amountCents / 100).toFixed(2)} of prediction market credits`,
               },
             },

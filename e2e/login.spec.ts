@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Login Page", () => {
   test("loads login page", async ({ page }) => {
     await page.goto("/login");
-    await expect(page.locator("h1")).toContainText("Shaadi Book");
+    await expect(page.locator("h1")).toContainText("Baby Hasan Bets");
     await expect(page.locator("text=Continue")).toBeVisible();
   });
 

@@ -23,22 +23,22 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Shaadi Book — Parsh & Spoorthi",
-  description: "Live prediction markets for the wedding",
+  title: "Baby Hasan Bets — Anusha & Alif",
+  description: "Live prediction markets for Baby Hasan's gender reveal",
   manifest: "/manifest.json",
-  metadataBase: new URL("https://parshandspoorthi.com"),
+  metadataBase: new URL("https://babyhasanbets.com"),
   openGraph: {
-    title: "Shaadi Book — Parsh & Spoorthi's Wedding",
+    title: "Baby Hasan Bets — Anusha & Alif",
     description:
-      "Place your bets on wedding predictions. Live markets for the big day in Udaipur.",
-    url: "https://parshandspoorthi.com",
-    siteName: "Shaadi Book",
+      "Place your bets on gender reveal predictions for Baby Hasan.",
+    url: "https://babyhasanbets.com",
+    siteName: "Baby Hasan Bets",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Shaadi Book — Prediction Markets for Parsh & Spoorthi's Wedding",
+        alt: "Baby Hasan Bets — Gender Reveal Prediction Markets",
       },
     ],
     locale: "en_US",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shaadi Book — Parsh & Spoorthi's Wedding",
+    title: "Baby Hasan Bets — Anusha & Alif",
     description:
-      "Place your bets on wedding predictions. Live markets for the big day in Udaipur.",
+      "Place your bets on gender reveal predictions for Baby Hasan.",
     images: ["/og-image.svg"],
   },
   icons: {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Shaadi Book",
+    title: "Baby Hasan Bets",
   },
 };
 

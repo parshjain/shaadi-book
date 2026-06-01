@@ -189,19 +189,20 @@ export default function LoginPage() {
       {/* Warm gold accent line */}
       <div className="h-0.5 bg-gold" />
 
-      <div className="flex-1 flex flex-col items-center justify-center px-5 py-12">
+      <div className="flex-1 flex w-full flex-col items-center justify-center px-5 py-12">
         {/* Branding */}
         <div className="text-center mb-10 animate-fade-in">
-          <h1 className="font-serif text-4xl font-semibold text-charcoal tracking-[0.05em] uppercase">
-            Shaadi Book
+          <h1 className="mx-auto max-w-xs font-serif text-[2rem] leading-tight font-semibold text-charcoal tracking-[0.02em] uppercase">
+            <span className="block">Baby Hasan</span>
+            <span className="block">Bets</span>
           </h1>
           {/* Gold accent underline */}
           <div className="mt-3 h-px w-14 mx-auto bg-gold" />
           <p className="font-sans mt-3 text-sm italic text-warmGray font-light">
-            Parsh &amp; Spoorthi &bull; Leela Palace, Udaipur
+            Anusha Kamal &amp; Alif Hasan
           </p>
           <p className="font-sans mt-1.5 text-xs text-warmGray/70">
-            Live prediction markets for the big day
+            Live prediction markets for Baby Hasan
           </p>
         </div>
 
@@ -399,8 +400,8 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="mt-8 text-[11px] text-warmGray/70 text-center max-w-xs">
-          By continuing you agree to the rules of Parsh &amp; Spoorthi&apos;s
-          wedding. All payouts in USD post-event.
+          By continuing you agree to the rules of Baby Hasan Bets.
+          All payouts in USD post-event.
         </p>
         <a
           href="/rules"

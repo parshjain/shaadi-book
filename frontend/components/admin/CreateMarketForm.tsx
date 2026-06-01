@@ -8,8 +8,8 @@
  *   - 2–5 outcome labels (dynamic add / remove)
  *   - Optional b_floor override
  *   - Open time: immediate or scheduled datetime
- *   - Event tag (Sangeet, Haldi, etc.)
- *   - Family side (Spoorthi / Parsh / Both)
+ *   - Event tag (Reveal, Outfits, Food, etc.)
+ *   - Person tag (Anusha / Alif / Baby Hasan / Both)
  *   - Custom freeform tags (comma-separated)
  */
 
@@ -123,7 +123,7 @@ export default function CreateMarketForm({ onCreated }: Props) {
           maxLength={500}
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Will the groom cry during the pheras?"
+          placeholder="Will Alif cry at the gender reveal?"
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
         />
       </div>
@@ -171,7 +171,7 @@ export default function CreateMarketForm({ onCreated }: Props) {
       {/* Event tag */}
       <div>
         <label className="block text-sm font-medium text-charcoal mb-1">
-          Wedding Event{" "}
+          Category{" "}
           <span className="text-warmGray font-normal">(optional)</span>
         </label>
         <select
@@ -191,7 +191,7 @@ export default function CreateMarketForm({ onCreated }: Props) {
       {/* Family side */}
       <div>
         <label className="block text-sm font-medium text-charcoal mb-2">
-          Family Side{" "}
+          Person{" "}
           <span className="text-warmGray font-normal">(optional)</span>
         </label>
         <div className="flex items-center gap-2 flex-wrap">
@@ -202,10 +202,12 @@ export default function CreateMarketForm({ onCreated }: Props) {
               onClick={() => setFamilySide(side as FamilySide | "")}
               className={`rounded-full px-3 py-1 text-xs font-medium border transition-colors ${
                 familySide === side
-                  ? side === "Spoorthi"
+                  ? side === "Anusha"
                     ? "bg-rose-600 text-white border-rose-600"
-                    : side === "Parsh"
+                    : side === "Alif"
                     ? "bg-sky-600 text-white border-sky-600"
+                    : side === "Baby Hasan"
+                    ? "bg-violet-600 text-white border-violet-600"
                     : side === "Both"
                     ? "bg-amber-500 text-white border-amber-500"
                     : "bg-gray-700 text-white border-gray-700"
@@ -230,7 +232,7 @@ export default function CreateMarketForm({ onCreated }: Props) {
           type="text"
           value={customTagsRaw}
           onChange={(e) => setCustomTagsRaw(e.target.value)}
-          placeholder="dance, emotional, food"
+          placeholder="emotional, cake, timing"
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
         />
       </div>

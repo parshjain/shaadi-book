@@ -1,5 +1,5 @@
 /**
- * Typed API client for the Shaadi Book backend (tRPC HTTP protocol).
+ * Typed API client for the Baby Hasan Bets backend (tRPC HTTP protocol).
  *
  * We use @trpc/client's createTRPCProxyClient directly to call the backend.
  * Since the frontend and backend live in separate packages we define the

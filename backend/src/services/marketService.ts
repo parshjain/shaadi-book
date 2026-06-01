@@ -82,9 +82,9 @@ export interface MarketWithPrices {
    * Keeping separate names prevents confusion when reading payout calculations.
    */
   totalPool: number;
-  /** Wedding event tag (e.g. 'Sangeet', 'Haldi', 'Reception'). */
+  /** Gender reveal event tag (e.g. 'Reveal', 'Outfits', 'Food'). */
   eventTag: string | null;
-  /** Family side ('Spoorthi', 'Parsh', 'Both'). */
+  /** Person or family side ('Anusha', 'Alif', 'Baby Hasan', 'Both'). */
   familySide: string | null;
   /** Freeform custom tags. */
   customTags: string[];

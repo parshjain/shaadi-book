@@ -5,7 +5,7 @@
  *
  * Redesigned for 10+ markets: hero card for the hottest market,
  * compact card list below, sort pills (Hot, Popular, Newest, Closing Soon).
- * Pull-to-refresh, real-time price updates, filter tabs by event/family.
+ * Pull-to-refresh, real-time price updates, filter tabs by category/person.
  */
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
@@ -239,10 +239,10 @@ export default function MarketFeedPage() {
         <div className="max-w-lg mx-auto flex items-center justify-between">
           <div>
             <h1 className="font-serif text-xl font-semibold text-charcoal tracking-[0.05em] uppercase">
-              Shaadi Book
+              Baby Hasan Bets
             </h1>
             <p className="font-sans text-xs italic text-warmGray font-light">
-              Parsh &amp; Spoorthi &bull; Udaipur
+              Anusha Kamal &amp; Alif Hasan
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -293,7 +293,7 @@ export default function MarketFeedPage() {
                   : "text-warmGray font-medium hover:text-charcoal"
               }`}
             >
-              By Event
+              By Category
             </button>
             <button
               onClick={() => { setFilterMode("family"); setActiveEventTag(null); }}
@@ -303,7 +303,7 @@ export default function MarketFeedPage() {
                   : "text-warmGray font-medium hover:text-charcoal"
               }`}
             >
-              By Family
+              By Person
             </button>
             {(activeEventTag || activeFamilySide) && (
               <button
@@ -337,17 +337,13 @@ export default function MarketFeedPage() {
             </div>
           )}
 
-          {/* Family side pills */}
+          {/* Person pills */}
           {filterMode === "family" && (
             <div className="flex gap-2 flex-wrap">
               {FAMILY_SIDES.map((side) => {
                 const isActive = activeFamilySide === side;
                 const label =
-                  side === "Spoorthi"
-                    ? "Spoorthi's side"
-                    : side === "Parsh"
-                    ? "Parsh's side"
-                    : "Both sides";
+                  side === "Both" ? "Both parents" : side;
                 return (
                   <button
                     key={side}
@@ -439,7 +435,7 @@ export default function MarketFeedPage() {
               </p>
               <p className="text-sm text-warmGray mt-1">
                 {activeEventTag || activeFamilySide
-                  ? "Try a different event or clear the filter."
+                  ? "Try a different category or clear the filter."
                   : archivedMarkets.length > 0
                   ? "Check the archive below for results."
                   : "Check back when the celebration starts."}

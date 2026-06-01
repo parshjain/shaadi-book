@@ -55,9 +55,9 @@ export interface MarketWithPrices {
    * At resolution, 100% of this amount is distributed to winning shareholders.
    */
   totalPool: number;
-  /** Wedding event tag (e.g. 'Sangeet', 'Haldi', 'Reception'). */
+  /** Gender reveal event tag (e.g. 'Reveal', 'Outfits', 'Food'). */
   eventTag: string | null;
-  /** Family side ('Spoorthi', 'Parsh', 'Both'). */
+  /** Person or family side ('Anusha', 'Alif', 'Baby Hasan', 'Both'). */
   familySide: string | null;
   /** Freeform custom tags. */
   customTags: string[];
@@ -72,18 +72,17 @@ export interface MarketWithPrices {
 // ---------------------------------------------------------------------------
 
 export const EVENT_TAGS = [
-  "Sangeet",
-  "Haldi",
-  "Baraat",
-  "Wedding Ceremony",
-  "Reception",
-  "After Party",
+  "Reveal",
+  "Family",
+  "Outfits",
+  "Food",
+  "Guests",
   "General",
 ] as const;
 
 export type EventTag = typeof EVENT_TAGS[number];
 
-export const FAMILY_SIDES = ["Spoorthi", "Parsh", "Both"] as const;
+export const FAMILY_SIDES = ["Anusha", "Alif", "Baby Hasan", "Both"] as const;
 export type FamilySide = typeof FAMILY_SIDES[number];
 
 export interface RecentPurchase {
